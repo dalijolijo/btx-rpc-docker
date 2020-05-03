@@ -1,19 +1,19 @@
 version: '3'
 
 services:
-  bitcore_mn1:
+  bitcored:
     build:
       context: ./docker-bitcored
       dockerfile: ./Dockerfile
-    image: bitcored-mn
-    container_name: bitcore_mn1
+    image: bitcored
+    container_name: bitcore-rpc
     command:
-      -externalip=${EXTERNAL_IP}
+      -externalip=51.15.77.33
       -whitebind=172.21.0.11:8555
       -rpcbind=172.21.0.11
       -maxconnections=64
-      -rpcuser=rpc
-      -rpcpassword=${MN1_RPC_PWD}
+      -rpcuser=btx-rpc-user
+      -rpcpassword=btx-rpc-pwd
     restart: always
     networks:
       bitcore-net:
@@ -24,7 +24,7 @@ services:
       - 8555
       - 8556
     volumes:
-      - /home/bitcore_mn1:/data
+      - /home/bitcore:/data
 
 networks:
   bitcore-net:

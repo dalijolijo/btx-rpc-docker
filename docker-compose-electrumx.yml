@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  bitcored:
+    build:
+      context: ./docker-bitcored
+      dockerfile: ./Dockerfile
+    image: bitcored
+    container_name: bitcore-rpc
+    command:
+      -externalip=51.15.77.33
+      -whitebind=172.21.0.11:8555
+      -rpcbind=172.21.0.11
+      -maxconnections=64
+      -rpcuser=btx-rpc-user
+      -rpcpassword=btx-rpc-pwd
+    restart: always
+    networks:
+      bitcore-net:
+        ipv4_address: 172.21.0.11
+    ports:
+      - 8555:8555
+    expose:
+      - 8555
+      - 8556
+    volumes:
+      - /home/bitcore:/data
+
+  electrumx:
+    image: dalijolijo/electrumx
+    container_name: electrumx
+    environment:
+      DAEMON_URL: "http://btx-rpc-user:btx-rpc-pwd@172.21.0.11:8556"
+      COIN: "bitcore"
+    restart: always
+    networks:
+      bitcore-net:
+        ipv4_address: 172.21.0.12
+    ports:
+      - 8000:8000
+      - 50002:50002
+    expose:
+      - 8000
+      - 50002
+    volumes:
+      - /home/bitcore:/data
+    depends_on:
+      - bitcored
+
+networks:
+  bitcore-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.21.0.0/24
