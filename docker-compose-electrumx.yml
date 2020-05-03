@@ -1,4 +1,4 @@
-version: '3'
+version: '2.1'
 
 services:
   bitcored:
@@ -25,13 +25,15 @@ services:
       - 8556
     volumes:
       - /home/bitcore:/data
+    healthcheck:
+      test: "bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx-rpc-user -rpcpassword=btx-rpc-pwd -rpcport=8556 mnsync status | grep MASTERNODE_SYNC_FINISHED"
+      interval: 20s
+      timeout: 10s
+      retries: 30
 
   electrumx:
     image: dalijolijo/electrumx
     container_name: electrumx
-    environment:
-      DAEMON_URL: "http://btx-rpc-user:btx-rpc-pwd@172.21.0.11:8556"
-      COIN: "bitcore"
     restart: always
     networks:
       bitcore-net:
@@ -44,8 +46,12 @@ services:
       - 50002
     volumes:
       - /home/bitcore:/data
+    environment:
+      DAEMON_URL: "http://btx-rpc-user:btx-rpc-pwd@172.21.0.11:8556"
+      COIN: "Bitcore"
     depends_on:
-      - bitcored
+      bitcored:
+        condition: service_healthy
 
 networks:
   bitcore-net:
@@ -54,3 +60,4 @@ networks:
       driver: default
       config:
         - subnet: 172.21.0.0/24
+
