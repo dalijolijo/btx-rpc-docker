@@ -27,9 +27,9 @@ services:
       - /home/bitcore:/data
     healthcheck:
       test: "bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx-rpc-user -rpcpassword=btx-rpc-pwd -rpcport=8556 mnsync status | grep MASTERNODE_SYNC_FINISHED"
-      interval: 20s
-      timeout: 10s
-      retries: 30
+      interval: 2m
+      timeout: 1m
+      retries: 60
 
   electrumx:
     image: dalijolijo/electrumx:1.14.0
