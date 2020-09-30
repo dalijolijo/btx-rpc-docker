@@ -19,5 +19,5 @@ docker run \
     --name electrumx \
     -it \
     --rm \
-    dalijolijo/electrumx \
+    dalijolijo/electrumx:1.14.0 \
     python3 electrumx_compact_history
