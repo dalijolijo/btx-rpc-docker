@@ -58,5 +58,5 @@ flush-electrumx-db.sh
 
 # Troubleshooting
 
-## Problem: No connection to electrum server
+## Problem: No connection to electrum server eleX.bitcore.cc
 Go to your Electrum-btx installation folder and remove the cert file 'eleX.bitcore.cc' in subdir 'electrum-btx_data\cert'
