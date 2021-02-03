@@ -1,6 +1,6 @@
 #!/bin/bash
-
-VERSION=0.90.9.6
+set -x
+VERSION=1.9.9.6
 
 #Install needed packages
 dpkg-query -l unzip > /dev/null
@@ -14,13 +14,18 @@ fi
 cd ./bootstrap
 
 if [ ! -f ./bootstrap.zip ]; then
-   wget https://github.com/LIMXTEC/BitCore/releases/download/${VERSION}/bootstrap.zip -O bootstrap.zip
+   wget https://github.com/LIMXTEC/Megacoin/releases/download/${VERSION}/bootstrap-09-2020.zip -O bootstrap.zip
 fi
 if [ ! -d ./blocks ]; then
    unzip bootstrap.zip
 fi
 
 cd ..
-./stop-electrumx.sh
-cp -r ./bootstrap/blocks/ ./bootstrap/chainstate/ /home/bitcore
-./start-electrumx.sh
+
+#./stop-electrumx.sh
+docker-compose -f docker-compose-rpc.yml down 
+rm -rf /home/megacoin/blocks
+rm -rf /home/megacoin/chainstate
+cp -r ./bootstrap/blocks/ ./bootstrap/chainstate/ /home/megacoin
+#./start-electrumx.sh
+docker-compose -f docker-compose-rpc.yml up -d

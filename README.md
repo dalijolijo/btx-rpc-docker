@@ -1,4 +1,4 @@
-# btx-rpc-docker
+# mec-rpc-docker
 
 # Installation process
 
@@ -12,7 +12,7 @@ If the server have less than 4GB RAM create a swap file with add-swap.sh
 ./add-swap.sh 
 ```
 
-Start electrumx/bitcore-rpc with start-electrumx.sh script
+Start electrumx/megacoin-rpc with start-electrumx.sh script
 
 ```sh
 ./start-electrumx.sh
@@ -25,13 +25,13 @@ Download bootstrap file and replace the old directories (blocks and chainstate) 
 
 # Maintenance
 
-Stop electrumx/bitcore-rpc with stop-electrumx.sh script
+Stop electrumx/megacoin-rpc with stop-electrumx.sh script
 
 ```sh
 ./stop-electrumx.sh
 ```
 
-Check status of bitcore-rpc docker with checkstatus.sh script
+Check status of megacoin-rpc docker with checkstatus.sh script
 ```sh
 ./checkstatus.sh
 ```
@@ -41,7 +41,7 @@ Cleanup memory and old docker files with cleanup.sh script
 cleanup.sh
 ```
 
-Show log files of electrumx/bitcore-rpc docker containers with logs-electrumx.sh script
+Show log files of electrumx/megacoin-rpc docker containers with logs-electrumx.sh script
 ```sh
 logs-electrumx.sh
 ```
@@ -58,5 +58,5 @@ flush-electrumx-db.sh
 
 # Troubleshooting
 
-## Problem: No connection to electrum server eleX.bitcore.cc
-Go to your Electrum-btx installation folder and remove the cert file 'eleX.bitcore.cc' in subdir 'electrum-btx_data\cert'
+## Problem: No connection to electrum server eleX.megacoin.cc
+Go to your Electrum-mec installation folder and remove the cert file 'eleX.megacoin.cc' in subdir 'electrum-mec_data\cert'

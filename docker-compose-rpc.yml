@@ -1,33 +1,34 @@
 version: '3'
 
 services:
-  bitcored:
+  megacoind:
     build:
-      context: ./docker-bitcored
+      context: ./docker-megacoind
       dockerfile: ./Dockerfile
-    image: bitcored
-    container_name: bitcore-rpc
+    image: megacoind
+    container_name: megacoin-rpc
     command:
-      -externalip=51.15.77.33
-      -whitebind=172.21.0.11:8555
+      -externalip=51.15.121.233
+      -bind=172.21.0.11
+      -whitebind=172.21.0.11:7951
       -rpcbind=172.21.0.11
       -maxconnections=64
-      -rpcuser=btx-rpc-user
-      -rpcpassword=btx-rpc-pwd
+      -rpcuser=mec-rpc-user
+      -rpcpassword=mec-rpc-pwd
     restart: always
     networks:
-      bitcore-net:
+      megacoin-net:
         ipv4_address: 172.21.0.11
     ports:
-      - 8555:8555
+      - 7951:7951
     expose:
-      - 8555
-      - 8556
+      - 7951
+      - 7952
     volumes:
-      - /home/bitcore:/data
+      - /home/megacoin:/data
 
 networks:
-  bitcore-net:
+  megacoin-net:
     driver: bridge
     ipam:
       driver: default

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #Corrupt db: remove the following folders
-rm -rf /home/bitcore/hist
-rm -rf /home/bitcore/meta
-rm -rf /home/bitcore/utxo
-rm -rf /home/bitcore/core
-rm -rf /home/bitcore/COIN
+rm -rf /home/megacoin/hist
+rm -rf /home/megacoin/meta
+rm -rf /home/megacoin/utxo
+rm -rf /home/megacoin/core
+rm -rf /home/megacoin/COIN

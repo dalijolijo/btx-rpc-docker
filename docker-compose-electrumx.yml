@@ -1,32 +1,32 @@
 version: '2.1'
 
 services:
-  bitcored:
+  megacoind:
     build:
-      context: ./docker-bitcored
+      context: ./docker-megacoind
       dockerfile: ./Dockerfile
-    image: bitcored
-    container_name: bitcore-rpc
+    image: megacoind
+    container_name: megacoin-rpc
     command:
-      -externalip=51.15.77.33
-      -whitebind=172.21.0.11:8555
+      -externalip=51.15.121.233
+      -whitebind=172.21.0.11:7951
       -rpcbind=172.21.0.11
       -maxconnections=64
-      -rpcuser=btx-rpc-user
-      -rpcpassword=btx-rpc-pwd
+      -rpcuser=mec-rpc-user
+      -rpcpassword=mec-rpc-pwd
     restart: always
     networks:
-      bitcore-net:
+      megacoin-net:
         ipv4_address: 172.21.0.11
     ports:
-      - 8555:8555
+      - 7951:7951
     expose:
-      - 8555
-      - 8556
+      - 7951
+      - 7952
     volumes:
-      - /home/bitcore:/data
+      - /home/megacoin:/data
     healthcheck:
-      test: "bitcore-cli -datadir=/data -conf=/data/bitcore.conf -rpcconnect=172.21.0.11 -rpcuser=btx-rpc-user -rpcpassword=btx-rpc-pwd -rpcport=8556 mnsync status | grep MASTERNODE_SYNC_FINISHED"
+      test: "megacoin-cli -datadir=/data -conf=/data/megacoin.conf -rpcconnect=172.21.0.11 -rpcuser=mec-rpc-user -rpcpassword=mec-rpc-pwd -rpcport=7952 mnsync status | grep MASTERNODE_SYNC_FINISHED"
       interval: 2m
       timeout: 1m
       retries: 60
@@ -36,7 +36,7 @@ services:
     container_name: electrumx
     restart: always
     networks:
-      bitcore-net:
+      megacoin-net:
         ipv4_address: 172.21.0.12
     ports:
       - 8000:8000
@@ -45,16 +45,16 @@ services:
       - 8000
       - 50002
     volumes:
-      - /home/bitcore:/data
+      - /home/megacoin:/data
     environment:
-      DAEMON_URL: "http://btx-rpc-user:btx-rpc-pwd@172.21.0.11:8556"
-      COIN: "Bitcore"
+      DAEMON_URL: "http://mec-rpc-user:mec-rpc-pwd@172.21.0.11:7952"
+      COIN: "Megacoin"
     depends_on:
-      bitcored:
+      megacoind:
         condition: service_healthy
 
 networks:
-  bitcore-net:
+  megacoin-net:
     driver: bridge
     ipam:
       driver: default
