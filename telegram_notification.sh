@@ -3,7 +3,7 @@
 
 # cron job config
 # crontab -e
-#*/10 * * * * /root/btx-rpc-docker/telegram_notification.sh
+#*/10 * * * * /root/btx-rpc-docker/telegram_notification.sh > /var/log/telegram_notificationy.log 2>&1
 
 usage()
 {
@@ -37,17 +37,18 @@ if [ $? -ne 0 ] ; then
    pip3 install tgcli
 fi
 
+pushd /root/btx-rpc-docker/ >/dev/null
 source .env
 CHECK_HEALTH=$(docker ps | grep "unhealthy")
     if [ -n "$CHECK_HEALTH" ]; then
         ERROR_MSG="The bitcored docker container is unhealthy."
         TELEGRAM_MSG="$ELECTRUM_SERVER : $ERROR_MSG"
-        tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
+        /usr/local/bin/tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
     fi
 
 CHECK_RESTART=$(docker ps | grep "Restarting")
     if [ -n "$CHECK_RESTART" ]; then
         ERROR_MSG="The electrumx docker container restarts all the time."
         TELEGRAM_MSG="$ELECTRUM_SERVER : $ERROR_MSG"
-        tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
+        /usr/local/bin/tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
     fi
