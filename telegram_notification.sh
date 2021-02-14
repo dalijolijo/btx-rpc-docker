@@ -52,3 +52,18 @@ CHECK_RESTART=$(docker ps | grep "Restarting")
         TELEGRAM_MSG="$ELECTRUM_SERVER : $ERROR_MSG"
         /usr/local/bin/tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
     fi
+
+CHECK_EXIST_ELE=$(docker ps | grep "electrumx")
+    if [ -z "$CHECK_EXIST_ELE" ]; then
+        ERROR_MSG="The electrumx docker Container is down."
+        TELEGRAM_MSG="$ELECTRUM_SERVER : $ERROR_MSG"
+        /usr/local/bin/tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
+    fi
+
+CHECK_EXIST_BTX=$(docker ps | grep "bitcore-rpc")
+    if [ -z "$CHECK_EXIST_BTX" ]; then
+        ERROR_MSG="The bitcore-rpc docker Container is down"
+        TELEGRAM_MSG="$ELECTRUM_SERVER : $ERROR_MSG"
+        /usr/local/bin/tgcli bot -t "$MN_TELEGRAM_BOT_TOKEN" send -r "$MN_TELEGRAM_USER_ID" message "$TELEGRAM_MSG"
+    fi
+
