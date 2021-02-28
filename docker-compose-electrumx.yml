@@ -32,7 +32,7 @@ services:
       retries: 60
 
   electrumx:
-    image: dalijolijo/electrumx:1.14.0
+    image: dalijolijo/electrumx:1.15.0
     container_name: electrumx
     restart: always
     networks:
