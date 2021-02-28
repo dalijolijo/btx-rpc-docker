@@ -12,18 +12,42 @@ If the server have less than 4GB RAM create a swap file with add-swap.sh
 ./add-swap.sh 
 ```
 
+# Start/Stop only BTX RPC node
+
+Start bitcore-rpc with start-bitcore-rpc.sh script
+
+```sh
+./start-bitcore-rpc.sh
+```
+
+Stop bitcore-rpc with start-bitcore-rpc.sh script
+
+```sh
+./stop-bitcore-rpc.sh
+```
+
+# Start/Stop ElectrumX solution
+
 Start electrumx/bitcore-rpc with start-electrumx.sh script
 
 ```sh
 ./start-electrumx.sh
 ```
 
+Stop electrumx/bitcore-rpc with stop-electrumx.sh script
+
+```sh
+./stop-electrumx.sh
+```
+
+# Bootstrapping BTX blockchain
+
 Download bootstrap file and replace the old directories (blocks and chainstate) with bootstrapping.sh script
 ```sh
 ./bootstrapping.sh
 ```
 
-# Maintenance
+# Maintenance ElectrumX solution
 
 Stop electrumx/bitcore-rpc with stop-electrumx.sh script
 
@@ -56,7 +80,7 @@ Flush electrumx database with flush-electrumx-db.sh script
 flush-electrumx-db.sh
 ```
 
-# Troubleshooting
+# Troubleshooting ElectrumX solution
 
 ## Problem: No connection to electrum server eleX.bitcore.cc
 Go to your Electrum-btx installation folder and remove the cert file 'eleX.bitcore.cc' in subdir 'electrum-btx_data\cert'
