@@ -49,6 +49,9 @@ services:
     environment:
       DAEMON_URL: "http://mec-rpc-user:mec-rpc-pwd@172.21.0.11:7952"
       COIN: "Megacoin"
+      COST_SOFT_LIMIT: 0
+      COST_HARD_LIMIT: 0
+      CACHE_MB: 2048
     depends_on:
       megacoind:
         condition: service_healthy
