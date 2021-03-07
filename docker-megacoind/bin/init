@@ -9,6 +9,7 @@ if [ ! -e "${CONF}" ]; then
   echo "listen=1
 server=1
 masternode=0
+txindex=1
 
 whitelist=172.21.0.0/24
 rpcallowip=172.21.0.0/24
