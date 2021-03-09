@@ -49,6 +49,9 @@ services:
     environment:
       DAEMON_URL: "http://btx-rpc-user:btx-rpc-pwd@172.21.0.11:8556"
       COIN: "Bitcore"
+      COST_SOFT_LIMIT: 0
+      COST_HARD_LIMIT: 0
+      CACHE_MB: 2048
     depends_on:
       bitcored:
         condition: service_healthy
