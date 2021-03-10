@@ -15,7 +15,7 @@ docker run \
     -e DAEMON_URL="http://mec-rpc-user:mec-rpc-pwd@172.21.0.11:7952" \
     -e COIN=Megacoin \
     -p 8000:8000 \
-    -p 50002:50002 \
+    -p 50006:50006 \
     --name electrumx \
     -it \
     --rm \
